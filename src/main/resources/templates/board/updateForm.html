@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/update.css">
+  <title>게시글수정</title>
+</head>
+<body>
+<div class="wrap">
+  <h3 class="header">게시글수정</h3>
+  <form class="frm" action="" method="post">
+    <div class="boardId">
+      <label for="boardId">게시글번호</label>
+      <input id="boardId" name="boardId" type="text" th:value="${board.boardId}" readonly>
+    </div>
+    <div class="bname">
+      <label for="bname">작성자</label>
+      <input id="bname" name="bname" type="text" th:value="${board.bname}" readonly>
+    </div>
+    <div class="title">
+      <label for="title">제목</label>
+      <input id="title" name="title" type="text" th:value="${board.title}">
+      <span class="err-msg" th:if="${s_err_title != null and s_err_title != ''}" th:class="'err-msg on'"
+            th:text="${s_err_title}"></span>
+    </div>
+    <div class="userContent">
+      <label for="userContent"></label>
+      <textarea id="userContent" name="userContent" th:text="${board.userContent}"></textarea>
+      <span class="err-msg" th:if="${s_err_userContent != null and s_err_userContent != ''}" th:class="'err-msg on'"
+            th:text="${s_err_userContent}"></span>
+    </div>
+    <div class="btns">
+      <input id="cancelBtn" type="reset" value="취소">
+      <input id="updateBtn" type="submit" value="저장">
+      <input id="listBtn" type="button" value="목록" onclick="location.href='/boards'">
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/board/all.css">
+  <script src="/js/board/all.js" async></script>
+  <title>게시판목록</title>
+</head>
+<body>
+<div class="wrap">
+  <h3 class="header">게시글목록</h3>
+  <form id="frm" class="frm" action="/boards/del" method="POST">
+    <div>
+      <table class="board">
+        <thead>
+        <tr>
+          <td>게시글번호</td>
+          <td>제목</td>
+          <td>작성자</td>
+          <td>작성일자</td>
+        </tr>
+        </thead>
+        <tbody id="rows">
+        <tr class="row" th:each="board :${list}" th:data-board-id="${board.boardId}">
+          <td th:text="${board.boardId}"></td>
+          <td th:text="${board.title}"></td>
+          <td th:text="${board.bname}"></td>
+          <td th:text="${#temporals.format(board.cdate, 'yyyy-MM-dd')}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="btn">
+      <button type="button" id="addBtn">게시글작성</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

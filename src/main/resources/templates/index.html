@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th=http://www.thymeleaf.org>
+<head>
+  <meta charset="UTF-8">
+  <title>초기화면(dynamic)</title>
+</head>
+<body>
+  <h3>Hello world~!(dynamic)</h3>
+<<<<<<< HEAD
+  <th:block th:if="${session.loginMember}">
+    <p th:text="${session.loginMember.nickname}"></p>
+    <ul>
+      <li><a href="/boards">게시판관리</a></li>
+      <li><a href="/pubdata/news">뉴스검색</a></li>
+      <li><a href="/pubdata/stocks">주가시세조회</a></li>
+      <li><a href="#" id="logout">로그아웃</a></li>
+    </ul>
+  </th:block>
+  <th:block th:unless="${session.loginMember}">
+    <ul>
+      <li><a href="/members/join">회원가입</a></li>
+      <li><a href="/login">로그인</a></li>
+    </ul>
+  </th:block>
+  <script>
+    logout.addEventListener('click',evt=>{
+      evt.preventDefault(); // 기본 이벤트 제거
+      fetch('/logout',{method:'POST',body:null})
+        .then(res=>res.text())
+        .then(res=>{
+          if(res==='OK'){
+            location.href='/';
+          }
+         })
+        .catch(console.log);
+    });
+  </script>
+=======
+  <ul>
+    <li><a href="#">게시판관리</a></li>
+    <li><a href="/pubdata/news">뉴스검색</a></li>
+    <li><a href="/pubdata/stocks">주가시세조회</a></li>
+  </ul>
+>>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
+</body>
+</html>
