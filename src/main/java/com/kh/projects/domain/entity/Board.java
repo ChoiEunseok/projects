@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Data
 public class Board {
   private Long boardId;           //number(10),     --아이디
+  private Long memberId;           //number(10),    --회원아이디
   private String bname;           //varchar(30),    --작성자
   private String title;           //varchar(100),   --제목
   private String userContent;    //CLOB,           --내용

@@ -15,14 +15,14 @@
     <div class="title">
       <label for="title">제목</label>
       <input id="title" name="title" type="text" th:value="*{title}">
-      <span class="err-msg" id="errTitle"></span>
       <span class="err-msg" th:if="${s_err_title != ''}" th:class="'err-msg on'" th:text="${s_err_title}"></span>
     </div>
     <div class="bname">
       <label for="bname">작성자</label>
-      <input id="bname" name="bname" type="text" th:value="*{bname}">
-      <span class="err-msg" id="errBname"></span>
-      <span class="err-msg" th:if="${s_err_bname != ''}" th:class="'err-msg on'" th:text="${s_err_bname}"></span>
+      <input id="bname" name="bname" type="text" th:value="${session.loginMember.nickname}">
+      <input type="hidden" name="memberId" th:value="${session.loginMember.memberId}">
+<!--      <span class="err-msg" id="errBname"></span>-->
+<!--      <span class="err-msg" th:if="${s_err_bname != ''}" th:class="'err-msg on'" th:text="${s_err_bname}"></span>-->
     </div>
     <div class="userContent">
       <label for="userContent"></label>

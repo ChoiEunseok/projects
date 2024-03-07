@@ -7,8 +7,8 @@ drop sequence comments_comment_id_seq;
 create table comments(
     comment_id      number(10),     --아이디 기본키
     board_id        number(10),     --원글(보드)아이디 왜래키
-    cname           varchar(30),    --작성자
-    user_comment    CLOB,           --내용
+    cname           varchar2(30),   --작성자
+    user_comment    varchar2(300),  --내용
     cdate           timestamp,      --작성일자
     udate           timestamp       --수정일자
 );

@@ -6,8 +6,8 @@ drop sequence board_board_id_seq;
 --게시판테이블 생성
 create table board(
     board_id        number(10),     --아이디
-    bname           varchar(30),    --작성자
-    title           varchar(100),   --제목
+    bname           varchar2(30),    --작성자
+    title           varchar2(100),   --제목
     user_content    CLOB,           --내용
     cdate           timestamp,      --작성일자
     udate           timestamp       --수정일자

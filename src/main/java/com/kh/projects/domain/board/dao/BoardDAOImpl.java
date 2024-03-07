@@ -31,8 +31,8 @@ public class BoardDAOImpl implements BoardDAO {
   @Override
   public Long save(Board board) {
     StringBuffer sql = new StringBuffer();
-    sql.append("insert into board(board_id,bname,title,user_content) ");
-    sql.append("values(board_board_id_seq.nextval, :bname, :title, :userContent) ");
+    sql.append("insert into board(board_id,member_id,bname,title,user_content) ");
+    sql.append("values(board_board_id_seq.nextval, :memberId, :bname, :title, :userContent) ");
 
     //sql파라미터 자동매핑
     SqlParameterSource param = new BeanPropertySqlParameterSource(board);

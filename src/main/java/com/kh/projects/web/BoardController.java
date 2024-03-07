@@ -48,14 +48,14 @@ public class BoardController {
       model.addAttribute("s_err_title","영문/숫자/한글/특수문자(~!@#$%^&*()_=+-)가능, 3~30자");
       return "board/add";
     }
-    //1-2) 작성자
-    pattern = "^[ㄱ-ㅎ가-힣]{1,3}$";
-
-    if (!Pattern.matches(pattern, addForm.getBname()))  {
-      model.addAttribute("addForm", addForm);
-      model.addAttribute("s_err_bname", "한글 1~3자리");
-      return "forum/add";
-    }
+//    //1-2) 작성자
+//    pattern = "^[ㄱ-ㅎ가-힣]{1,3}$";
+//
+//    if (!Pattern.matches(pattern, addForm.getBname()))  {
+//      model.addAttribute("addForm", addForm);
+//      model.addAttribute("s_err_bname", "한글 1~3자리");
+//      return "forum/add";
+//    }
     //1-3) 내용
     pattern = "^[a-zA-Z0-9가-힣\s~!.@#$%^&*()_=+-]{3,500}$";
 
@@ -67,6 +67,7 @@ public class BoardController {
 
     //상품등록
     Board board = new Board();
+    board.setMemberId(addForm.getMemberId());
     board.setBname(addForm.getBname());
     board.setTitle(addForm.getTitle());
     board.setUserContent(addForm.getUserContent());
