@@ -27,15 +27,10 @@ class Pagination {
       i < this.currentPageGroupStart + this.pagesPerPage && i <= totalPages;
       i++
     ) {
-<<<<<<< HEAD
       //현재 페이지인경우
       if (i === this.currentPage) {
         pageNavigation += `<button class="active" id="page${i}">${i}</button> `;
       //현재 페이지아닌경우
-=======
-      if (i === this.currentPage) {
-        pageNavigation += `<button class="active" id="page${i}">${i}</button> `;
->>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
       } else {
         pageNavigation += `<button id="page${i}">${i}</button> `;
       }
@@ -56,13 +51,10 @@ class Pagination {
     this.currentPage = pageNumber;
   }
 
-<<<<<<< HEAD
   setCurrentPageGroupStart(cpgs) {
     this.currentPageGroupStart = cpgs;
   }
 
-=======
->>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
   setNextPageGroup() {
     this.currentPageGroupStart += this.pagesPerPage;
   }
@@ -94,10 +86,7 @@ class Pagination {
       document.getElementById('first').addEventListener('click', evt => {
         this.setCurrentPage(1);
         this.currentPageGroupStart = 1;
-<<<<<<< HEAD
         callback();
-=======
->>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
         this.displayPagination(callback);
       });
     }
@@ -105,12 +94,8 @@ class Pagination {
       document.getElementById('prev').addEventListener('click', evt => {
         if (this.currentPageGroupStart > 1) {
           this.setPrevPageGroup();
-<<<<<<< HEAD
           this.setCurrentPage(this.currentPageGroupStart+this.recordsPerPage-1);
           callback();
-=======
-          this.setCurrentPage(this.currentPageGroupStart);
->>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
           this.displayPagination(callback);
         }
       });
@@ -123,10 +108,7 @@ class Pagination {
         ) {
           this.setNextPageGroup();
           this.setCurrentPage(this.currentPageGroupStart);
-<<<<<<< HEAD
           callback();
-=======
->>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
           this.displayPagination(callback);
         }
       });
@@ -137,10 +119,7 @@ class Pagination {
         this.currentPageGroupStart =
           totalPages - (totalPages % this.pagesPerPage) + 1;
         this.setCurrentPage(totalPages);
-<<<<<<< HEAD
         callback();
-=======
->>>>>>> ec73a926ca3ddb532dcff57192e95e31beb4595b
         this.displayPagination(callback);
       });
     }

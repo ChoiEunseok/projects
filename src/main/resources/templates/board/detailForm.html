@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/board/detail.css">
+  <link rel="stylesheet" href="/css/comments/comments.css">
   <script src="/js/board/detail.js" async></script>
   <title>게시판조회</title>
 </head>
 <body>
-<div id="container">
-  <div class="wrap">
-    <h3 class="header">게시글조회</h3>
+<div class="container">
+  <h3 class="header">게시글조회</h3>
+  <div class="content">
     <form class="frm" action="#" method="post">
       <div class="boardId">
         <label for="boardId">게시글번호</label>
@@ -40,15 +41,16 @@
       </div>
     </form>
   </div>
-  <div>
+  <div class="bottom">
     <form id="commentForm">
       <div>
-        <label for="userComment">댓글</label><input id="userComment" name="userComment" type="text">
+        <label for="userComment"></label><input id="userComment" name="userComment" type="text" placeholder="댓글을 입력해보세요.">
         <button id="addBtn" type='button'>등록</button>
       </div>
     </form>
+    <div id="replyList"></div>
+    <div id="pagination"></div>
   </div>
-  <div id="replyList"></div>
 </div>
   <dialog id="delModal">
     <p>삭제하시겠습니까?</p>
@@ -63,48 +65,6 @@
     const memberEmail = [[${session.loginMember.email}]]
     const memberNickname = [[${session.loginMember.nickname}]]
   </script>
-  <script type="module" src = "/js/comments/comments.js" async>
-<!--    console.log(memberId, boardId, memberEmail, memberNickname);-->
-
-<!--    const $addBtn = document.querySelector('#addBtn');-->
-<!--    $addBtn.addEventListener('click',evt=>{-->
-<!--        console.log('등록')-->
-<!--        const formData = new FormData(document.querySelector('#commentForm'));-->
-<!--        const comments = {-->
-<!--          boardId : originalId,-->
-<!--          cname : memberNickname,-->
-<!--          userComment : formData.get('userComment')-->
-<!--        }-->
-<!--        add(comments);-->
-<!--    });-->
-
-
-<!--  //등록-->
-<!--  async function add(comments) {-->
-<!--    const url = `http://localhost:9080/api/boards`;-->
-<!--    const payload = comments;-->
-<!--    const option = {-->
-<!--      method: 'POST',-->
-<!--      headers: {-->
-<!--        'Content-Type': 'application/json',-->
-<!--        accept: 'application/json',-->
-<!--      },-->
-<!--      body: JSON.stringify(payload),   // js객체=>json포맷 문자열-->
-<!--    };-->
-<!--    try {-->
-<!--      const res = await fetch(url, option);-->
-<!--      if (!res.ok) return new Error('서버응답오류');-->
-<!--      const result = await res.json(); //응답메세지 바디를 읽어 json포맷 문자열=>js객체-->
-<!--      if (result.header.rtcd == '00') {-->
-<!--        console.log(result.body);-->
-<!--        list();-->
-<!--      } else {-->
-<!--        new Error('등록 실패!');-->
-<!--      }-->
-<!--    } catch (err) {-->
-<!--      console.error(err.message);-->
-<!--    }-->
-<!--  }-->
-  </script>
+  <script type="module" src = "/js/comments/comments.js" async></script>
 </body>
 </html>

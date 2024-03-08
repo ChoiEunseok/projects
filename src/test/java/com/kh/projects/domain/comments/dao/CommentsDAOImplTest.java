@@ -25,13 +25,21 @@ class CommentsDAOImplTest {
     comments.setUserComment("반갑습니다.");
 
     Long commentId = commentsDAO.save(comments);
-    log.info("productId={}", commentId);
+    log.info("commentId={}", commentId);
   }
 
   @Test
   void findById() {
     Long boardId = 1L;
     List<Comments> findedComments = commentsDAO.findByIdAll(boardId);
-    log.info("product={}", findedComments);
+    log.info("findedComments={}", findedComments);
+  }
+
+  @Test
+  void deleteById() {
+    Long commentId = 1L;
+    int deleteById = commentsDAO.deleteById(commentId);
+    log.info("deleteById={}", deleteById);
+
   }
 }

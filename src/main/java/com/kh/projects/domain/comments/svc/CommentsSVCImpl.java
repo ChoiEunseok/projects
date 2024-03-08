@@ -20,7 +20,27 @@ public class CommentsSVCImpl implements CommentsSVC {
   }
 
   @Override
+  public int deleteById(Long commentId) {
+    return commentsDAO.deleteById(commentId);
+  }
+
+  @Override
+  public int updateById(Long commentId, Comments comments) {
+    return commentsDAO.updateById(commentId, comments);
+  }
+
+  @Override
   public List<Comments> findByIdAll(Long boardId) {
     return commentsDAO.findByIdAll(boardId);
+  }
+
+  @Override
+  public List<Comments> findByAll(Long boardId, Long reqPage, Long reqCnt) {
+    return commentsDAO.findByAll(boardId, reqPage, reqCnt);
+  }
+
+  @Override
+  public int totalCnt() {
+    return commentsDAO.totalCnt();
   }
 }

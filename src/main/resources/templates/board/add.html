@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/add.css">
-  <script src="/js/board/add.js" async></script>
+  <link rel="stylesheet" href="/css/board/add.css">
   <title>게시판 작성</title>
 </head>
 <body>
@@ -19,7 +18,7 @@
     </div>
     <div class="bname">
       <label for="bname">작성자</label>
-      <input id="bname" name="bname" type="text" th:value="${session.loginMember.nickname}">
+      <input id="bname" name="bname" type="text" th:value="${session.loginMember.email}" readonly>
       <input type="hidden" name="memberId" th:value="${session.loginMember.memberId}">
 <!--      <span class="err-msg" id="errBname"></span>-->
 <!--      <span class="err-msg" th:if="${s_err_bname != ''}" th:class="'err-msg on'" th:text="${s_err_bname}"></span>-->

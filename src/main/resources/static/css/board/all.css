@@ -31,7 +31,7 @@ th, td {
  }
 
 .frm .board tr>td:nth-child(1){
-   width: 80px;
+   width: 90px;
 }
 
 .frm .board tr>td:nth-child(2){
@@ -39,10 +39,10 @@ th, td {
 }
 
 .frm .board tr>td:nth-child(3){
-    width: 60px;
+    width: 70px;
 }
 .frm .board tr>td:nth-child(4){
-    width: 80px;
+    width: 90px;
 }
 
 .frm .btn {

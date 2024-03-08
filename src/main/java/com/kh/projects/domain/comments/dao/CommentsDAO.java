@@ -8,10 +8,16 @@ public interface CommentsDAO {
   //작성
   Long save(Comments comments);
   //삭제
-//  int deleteById(Long commentId);
+  int deleteById(Long commentId);
   //수정
-//  int updateById(Long commentId, Comments Comments);
+  int updateById(Long commentId, Comments comments);
   //목록
-//  List<Comments> findAll();
   List<Comments> findByIdAll(Long boardId);
+
+  //목록(페이징)
+  List<Comments> findByAll(Long boardId, Long reqPage, Long reqCnt);
+
+  //총레코드 건수
+  int totalCnt();
+
 }

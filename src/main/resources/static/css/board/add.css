@@ -1,14 +1,13 @@
 @charset "utf-8";
 
-.container {
-    display:grid;
-    grid-template-areas:
-    "  header "
-    "  content "
-    " bottom";
-    grid-template-columns: 600px;
-    grid-template-rows: 50px 500px auto;
-    justify-content:center;
+.wrap {
+     display:grid;
+     grid-template-areas:
+                   "  header "
+                   "  frm ";
+     grid-template-columns: 600px;
+     grid-template-rows: 50px 500px;
+     justify-content:center;
 }
 .header{
     display:flex;
@@ -19,28 +18,9 @@
 .frm {
     display:flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+     width: 100%;
+     height: 100%;
 }
-
-.frm .boardId {
-    display:flex;
-    align-items:center;
-    width : 100%;
-    height: 50px;
-    margin-bottom:5px;
-}
-
-.frm .boardId label{
-    display:inline-block;
-    width : 80px;
-}
-.frm .boardId input{
-    box-sizing:border-box;
-    flex-grow:1;
-    height: 100%;
-}
-
 
 .frm .title {
     display:flex;
@@ -54,7 +34,7 @@
     display:flex;
     box-sizing:border-box;
     display:inline-block;
-    width : 80px;
+    width : 70px;
 }
 .frm .title input{
     box-sizing:border-box;
@@ -72,7 +52,7 @@
 
 .frm .bname label{
     display:inline-block;
-    width : 80px;
+    width : 70px;
 }
 .frm .bname input{
     box-sizing:border-box;
@@ -85,10 +65,10 @@
     margin-bottom:5px;
 }
 .frm .userContent textarea{
-    box-sizing:border-box;
-    text-align: start;
-    width:100%;
-    height:100%;
+   box-sizing:border-box;
+   width:100%;
+   height:100%;
+   font-size:1.1rem;
 }
 
 .frm .btns{
@@ -96,6 +76,18 @@
     justify-content :flex-end;
     height:50px;
 }
+
 .frm .btns > input{
     margin: 5px;
+}
+
+
+.err-msg {
+  display:none;
+}
+.err-msg.on{
+  display:inline-block;
+  color:red;
+  font-size:0.8em;
+  font-style: italic;
 }
