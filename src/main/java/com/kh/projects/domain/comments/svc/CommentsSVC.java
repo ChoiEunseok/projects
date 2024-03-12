@@ -21,5 +21,5 @@ public interface CommentsSVC {
   List<Comments> findByAll(Long boardId, Long reqPage, Long reqCnt);
 
   //총레코드 건수
-  int totalCnt();
+  int totalCnt(Long boardId);
 }

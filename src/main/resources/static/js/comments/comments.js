@@ -1,4 +1,4 @@
-    import {Pagination} from '/js/common.js'
+    import {Pagination, chageDateTime} from '/js/common.js'
 
     //페이징 객체 생성
     const pagination = new Pagination(10, 5); // 한페이지에 보여줄 레코드건수,한페이지에 보여줄 페이지수
@@ -42,13 +42,14 @@
                                           <span><input type="hidden" class="commentId" value="${item.commentId}"/></span>
                                           <span class="cname">${item.cname}</span>
                                           <span><input type="text" class="userComment" value="${item.userComment}" readonly/></span>
-                                          <span class="userStatus">
+                                          <span class="cdate">${chageDateTime(item.cdate)}</span>
+                                          <span class="BtnStatus">
                                             <button class='modifyBtn' type='button'>수정</button>
                                             <button class='deleteBtn' type='button'>삭제</button>
                                           </span>
                                         </div>`).join('');
         replyList.innerHTML = str;
-
+        console.log(result.totalCnt);
         //총건수는 초기 1회만
         pagination.setTotalRecords(result.totalCnt);
         pagination.displayPagination(list);
@@ -67,10 +68,8 @@
   replyList.addEventListener('click', function(evt) {
     const closestDiv = evt.target.closest('div');
     const commentIdSpan = closestDiv.querySelector('.commentId'); // commentId가 저장된 span 요소
-    console.log(commentIdSpan.value);
     const cnameSpan = closestDiv.querySelector('.cname'); // cname가 저장된 span 요소
     const commentIdInput = closestDiv.querySelector('.userComment');
-
     const commentId = commentIdSpan.value;
     const cname = cnameSpan.textContent;
 
@@ -81,7 +80,7 @@
     //삭제
     if(cname==memberEmail){
         console.log('사용자일치');
-        commentIdInput.removeAttribute('readonly');
+
 
       if(evt.target.className == 'deleteBtn') {
         console.log('실행');
@@ -91,13 +90,36 @@
         //수정
       } else if(evt.target.className == 'modifyBtn') {
           console.log('실행');
-          update(commentId, comments);
-
+          commentIdInput.removeAttribute('readonly');
+          closestDiv.style.background = 'white';
+          commentIdInput.style.background = 'white';
+          console.log(evt.target.closest('span'))
+          evt.target.closest('span').style.display = 'none';
+          closestDiv.appendChild(renderHTML());
+      } else if(evt.target.className == 'saveBtn') {
+           update(commentId,comments);
+      } else if(evt.target.className == 'cancelBtn') {
+           list();
       }
     } else{
+        if(evt.target.className == 'deleteBtn') {
+            alert("권한이 없습니다.");
+        } else if(evt.target.className == 'modifyBtn') {
+            alert("권한이 없습니다.");
+        }
         console.log('사용자불일치');
     }
   });
+
+  function renderHTML(){
+      const $span = document.createElement('span');
+      $span.innerHTML = ` <span class="BtnStatus">
+                            <button class='cancelBtn' type='button'>취소</button>
+                            <button class='saveBtn' type='button'>저장</button>
+                          </span> `;
+      return $span;
+  }
+
 
 
   //등록

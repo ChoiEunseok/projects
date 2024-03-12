@@ -118,16 +118,17 @@ public class ApiCommentsController {
                              @RequestParam("reqCnt") Long reqCnt) {
     log.info("reqPage={}",reqPage);
     log.info("reqCnt={}",reqCnt);
+    log.info("totalCnt={}",commentsSVC.totalCnt(pid));
     List<Comments> list = commentsSVC.findByAll(pid,reqPage,reqCnt);
 
     ApiResponse<List<Comments>> res = null;
     if (list.size() > 0) {
       res = ApiResponse.createApiResponse(ResCode.OK.getCode(), ResCode.OK.name(), list);
-      res.setTotalCnt(commentsSVC.totalCnt());
+      res.setTotalCnt(commentsSVC.totalCnt(pid));
       res.setReqPage(reqPage.intValue());
-      res.setRecCnt(reqCnt.intValue());
+      res.setReqCnt(reqCnt.intValue());
     } else {
-      res = ApiResponse.createApiResponseDetail(ResCode.OK.getCode(), ResCode.OK.name(), "등록된 상품이 1건도 없습니다.", list);
+      res = ApiResponse.createApiResponseDetail(ResCode.OK.getCode(), ResCode.OK.name(), "등록된 댓글이 1건도 없습니다.", list);
     }
     return res;
   }

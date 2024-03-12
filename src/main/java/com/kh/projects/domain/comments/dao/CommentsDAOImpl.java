@@ -96,7 +96,7 @@ public class CommentsDAOImpl implements CommentsDAO{
     sql.append("  select b.board_id, b.title, c.comment_id, c.cname, c.user_comment, c.cdate, c.udate  ");
     sql.append("    from comments c join board b on c.board_id = b.board_id ");
     sql.append(" where b.board_id = :boardId ");
-    sql.append("order by comment_id asc ");
+    sql.append("order by comment_id desc ");
     sql.append("offset (:reqPage-1) * :reqCnt rows fetch first :reqCnt rows only ");
 
     Map<String, Long> paramMap = Map.of("boardId", boardId, "reqPage", reqPage, "reqCnt", reqCnt);
@@ -108,10 +108,14 @@ public class CommentsDAOImpl implements CommentsDAO{
 
   //총레코드 건수
   @Override
-  public int totalCnt() {
-    String sql = "select count(comment_id) from comments";
+  public int totalCnt(Long boardId) {
+    String sql = "select count(comment_id) from comments where board_id = :boardId ";
+
+//    MapSqlParameterSource param = new MapSqlParameterSource();
 
     MapSqlParameterSource param = new MapSqlParameterSource();
+    param.addValue("boardId", boardId); // boardId를 매핑
+
     Integer cnt = template.queryForObject(sql, param, Integer.class);
     return cnt;
   }

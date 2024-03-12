@@ -7,10 +7,7 @@ import com.kh.projects.web.form.board.UpdateForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -26,7 +23,7 @@ public class BoardController {
   BoardController(BoardSVC boardSVC) {this.boardSVC = boardSVC;}
 
   //게시글작성양식
-  @GetMapping("/add")         // Get, http://localhost:9080/forums/add
+  @GetMapping("/add")         // Get, http://localhost:9080/boards/add
   public String addForm(Model model) {
     model.addAttribute("addForm", new AddForm());
     return "board/add";     // view이름  게시판등록화면
@@ -67,7 +64,6 @@ public class BoardController {
 
     //상품등록
     Board board = new Board();
-    board.setMemberId(addForm.getMemberId());
     board.setBname(addForm.getBname());
     board.setTitle(addForm.getTitle());
     board.setUserContent(addForm.getUserContent());
@@ -81,7 +77,7 @@ public class BoardController {
   }
 
   //조회
-  @GetMapping("/{pid}/detail")       //GET http://localhost:9080/forums/상품번호/detail
+  @GetMapping("/{pid}/detail")       //GET http://localhost:9080/boards/상품번호/detail
   public String findById(@PathVariable("pid") Long boardId, Model model){
 
     Optional<Board> findedBoard = boardSVC.findById(boardId);
@@ -98,12 +94,12 @@ public class BoardController {
 
     int deletedRowCnt = boardSVC.deleteById(boardId);
 
-    return "redirect:/boards";    //  GET http://localhost:9080/forums/
+    return "redirect:/boards";    //  GET http://localhost:9080/boards/
   }
 
 
   //수정양식
-  @GetMapping("/{pid}/edit")    // GET http://localhost:9080/forums/상품번호/edit
+  @GetMapping("/{pid}/edit")    // GET http://localhost:9080/boards/상품번호/edit
   public String updateForm(
           @PathVariable("pid") Long boardId,
           Model model) {
@@ -148,12 +144,34 @@ public class BoardController {
     return "redirect:/boards/{pid}/detail";
   }
 
-  //목록
-  @GetMapping   // GET http://localhost:9080/forums
-  public String findAll(Model model) {
+//  //목록
+//  @GetMapping   // GET http://localhost:9080/boards
+//  public String findAll(Model model) {
+//
+//    List<Board> list = boardSVC.findAll();
+//    model.addAttribute("list", list);
+//
+//    return "board/all";
+//  }
 
-    List<Board> list = boardSVC.findAll();
+  //목록(페이징)
+  @GetMapping   // GET http://localhost:9080/boards?reqPage=2&reqCnt=10
+  public String findAllByPaging(
+          Model model,
+          @RequestParam(value = "reqPage", defaultValue = "1") Long reqPage, // 요청 페이지
+          @RequestParam(value = "reqCnt", defaultValue = "10") Long reqCnt,   // 레코드 수
+          @RequestParam(value = "cpgs", defaultValue = "1") Long cpgs,   //페이지 그룹 시작번호
+          @RequestParam(value = "cp", defaultValue = "1") Long cp   // 현재 페이지
+  ) {
+    log.info("reqPage={}",reqPage);
+    log.info("reqCnt={}",reqCnt);
+    List<Board> list = boardSVC.findAll(reqPage, reqCnt);
+    int totalCnt = boardSVC.totalCnt();
+
     model.addAttribute("list", list);
+    model.addAttribute("totalCnt", totalCnt);
+    model.addAttribute("cpgs", cpgs);
+    model.addAttribute("cp", cp);
 
     return "board/all";
   }

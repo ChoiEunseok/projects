@@ -31,8 +31,8 @@ public class BoardDAOImpl implements BoardDAO {
   @Override
   public Long save(Board board) {
     StringBuffer sql = new StringBuffer();
-    sql.append("insert into board(board_id,member_id,bname,title,user_content) ");
-    sql.append("values(board_board_id_seq.nextval, :memberId, :bname, :title, :userContent) ");
+    sql.append("insert into board(board_id,bname,title,user_content) ");
+    sql.append("values(board_board_id_seq.nextval, :bname, :title, :userContent) ");
 
     //sql파라미터 자동매핑
     SqlParameterSource param = new BeanPropertySqlParameterSource(board);
@@ -110,5 +110,29 @@ public class BoardDAOImpl implements BoardDAO {
     List<Board> list = template.query(sql.toString(), BeanPropertyRowMapper.newInstance(Board.class));
 
     return list;
+  }
+
+  @Override
+  public List<Board> findAll(Long reqPage, Long reqCnt) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("  select board_id, bname, title, user_content, cdate, udate ");
+    sql.append("    from board ");
+    sql.append("order by board_id desc ");
+    sql.append("offset (:reqPage-1) * :reqCnt rows fetch first :reqCnt rows only ");
+
+    Map<String, Long> param = Map.of("reqPage", reqPage, "reqCnt", reqCnt);
+    List<Board> list = template.query(sql.toString(), param, BeanPropertyRowMapper.newInstance(Board.class));
+
+    return list;
+  }
+
+  //총레코드 건수
+  @Override
+  public int totalCnt() {
+    String sql = "select count(board_id) from board";
+
+    MapSqlParameterSource param = new MapSqlParameterSource();
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+    return cnt;
   }
 }

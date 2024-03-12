@@ -20,4 +20,8 @@ public interface BoardSVC {
 
   //목록
   List<Board> findAll();
+  List<Board> findAll(Long reqPage, Long reqCnt);
+
+  int totalCnt();
+
 }

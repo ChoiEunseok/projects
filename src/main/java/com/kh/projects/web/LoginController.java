@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +34,7 @@ public class LoginController {
 
   //로그인 처리
   @PostMapping("/login")     // /login?redirectUrl=사용자가요청한url
-  public String login(LoginForm loginForm, HttpServletRequest request,
+  public String login(LoginForm loginForm, HttpServletRequest request, Model model,
                       @RequestParam(value = "redirectUrl",required = false) String redirectUrl) {
     log.info("loginForm={}", loginForm);
     //1) 유효성 체크
@@ -41,7 +42,6 @@ public class LoginController {
     //2) 회원 유무 체크
     //2-1)회원 아이디 존재 유무 체크
     if (memberSVC.existEmail(loginForm.getEmail())) {
-
       Optional<Member> optionalMember = memberSVC.findByEmailAndPasswd(loginForm.getEmail(), loginForm.getPasswd());
       //3) 회원인경우 회원 정보를 세션에 저장
       if (optionalMember.isPresent()) {
@@ -55,9 +55,12 @@ public class LoginController {
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
       } else {
         //회원정보가 없는경우
+        model.addAttribute("loginForm", loginForm);
+        model.addAttribute("errorMessage", "아이디와 비밀번호가 일치하지 않습니다.");
         return "login";
       }
     } else {
+
       return "login";
     }
 

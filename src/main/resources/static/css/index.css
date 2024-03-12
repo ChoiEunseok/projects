@@ -1,0 +1,36 @@
+body {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.wrap{
+  display: flex;
+   flex-direction: column;
+   width: 300px;
+   height: 300px;
+   align-items: center;
+   align-content:center;
+}
+p {
+    display:inline-block;
+    font-size: 1.1em;
+}
+
+
+ul {
+ list-style-type:none;
+ background:lightgray;
+  padding: 0; /* 내부 간격 제거 */
+  margin: 0;
+}
+
+li {
+    margin : 30px;
+}
+li >a{
+    text-decoration: none; /* 밑줄 제거 */
+    font-size: 1.2em; /* 폰트 크기 증가 */
+    color: white;
+}
+

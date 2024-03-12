@@ -42,4 +42,20 @@ class CommentsDAOImplTest {
     log.info("deleteById={}", deleteById);
 
   }
+
+  @Test
+  void saveMultiple() {
+    Comments comments = new Comments();
+    int start = 1;
+    int end = 55;
+
+    for (long i = start; i <= end; i++) {
+      comments.setBoardId(115L);
+      comments.setCname("user1@kh.com");
+      comments.setUserComment("반갑습니다."+i);
+      Long commentId = commentsDAO.save(comments);
+      log.info("commentId={}", commentId);
+    }
+
+  }
 }

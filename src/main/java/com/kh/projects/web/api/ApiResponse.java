@@ -43,8 +43,8 @@ public class ApiResponse<T> {
     this.totalCnt = totalCnt;
   }
 
-  public void setRecCnt(int recCnt) {
-    this.reqCnt = recCnt;
+  public void setReqCnt(int reqCnt) {
+    this.reqCnt = reqCnt;
   }
 
   public void setReqPage(int reqPage) {

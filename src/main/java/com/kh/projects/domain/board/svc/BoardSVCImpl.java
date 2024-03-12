@@ -40,4 +40,9 @@ public class BoardSVCImpl implements BoardSVC{
   public List<Board> findAll() {
     return boardDAO.findAll();
   }
+
+  public List<Board> findAll(Long reqPage, Long reqCnt) {return boardDAO.findAll(reqPage, reqCnt);}
+
+  @Override
+  public int totalCnt() {return boardDAO.totalCnt();}
 }

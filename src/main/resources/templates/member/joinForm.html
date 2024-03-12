@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="#{title.member.join}">$Title$</title>
+  <link rel="stylesheet" href="/css/member/join.css">
+  <title>회원가입</title>
 </head>
 <body>
+<div class="wrap">
   <h3>회원가입</h3>
   <form id="frm" action="/members/join" method="POST" th:object="${joinForm}">
     <p>
@@ -15,11 +17,20 @@
       <button type="button" id="dupchkBtn">중복체크</button>
       <span class="errmsg" id="errmsg_email"></span>
     </p>
-    <p><input type="password" name="passwd" placeholder="비밀번호"></p>
+    <p>
+      <input type="password" name="passwd" placeholder="비밀번호">
+      <span class="err-msg" th:if="${s_err_pwd != ''}" th:class="'err-msg on'" th:text="${s_err_pwd}"></span>
+    </p>
     <p><input type="password" placeholder="비밀번호확인"></p>
-    <p><input type="text" name="nickname" placeholder="별칭"></p>
-    <p><button id="joinBtn">가입</button></p>
+    <p>
+      <input type="text" name="nickname" placeholder="별칭">
+      <span class="err-msg" th:if="${s_err_nick != ''}" th:class="'err-msg on'" th:text="${s_err_nick}"></span>
+    </p>
+    <p>
+      <button id="joinBtn">가입</button>
+    </p>
   </form>
+</div>
   <script>
     frm.addEventListener('submit', evt=>{
       evt.preventDefault(); //submit차단

@@ -16,4 +16,7 @@ public interface BoardDAO {
   int updateById(Long boardId, Board board);
   //목록
   List<Board> findAll();
+  List<Board> findAll(Long reqPage, Long reqCnt);
+  //총레코드 건수
+  int totalCnt();
 }

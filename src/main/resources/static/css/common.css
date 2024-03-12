@@ -1,5 +1,23 @@
+
+
 #pagination {
   display: flex;
   justify-content: center;
   justify-items: center;
+}
+
+#pagination > button {
+     color : white;
+     border: none;
+     outline:none;
+     background : lightgray;
+     font-weight : bold;
+}
+#pagination >button:hover{
+    cursor: pointer;
+    color : white;
+    background : pink;
+}
+#pagination >button.active {
+    background : black;
 }

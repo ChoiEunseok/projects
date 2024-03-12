@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/board/detail.css">
+  <link rel="stylesheet" href="/css/common.css">
   <link rel="stylesheet" href="/css/comments/comments.css">
   <script src="/js/board/detail.js" async></script>
   <title>게시판조회</title>
@@ -43,8 +44,8 @@
   </div>
   <div class="bottom">
     <form id="commentForm">
-      <div>
-        <label for="userComment"></label><input id="userComment" name="userComment" type="text" placeholder="댓글을 입력해보세요.">
+      <div class="commentWrap">
+        <textarea id="userComment" name="userComment" type="text" placeholder="댓글을 입력해보세요."></textarea>
         <button id="addBtn" type='button'>등록</button>
       </div>
     </form>

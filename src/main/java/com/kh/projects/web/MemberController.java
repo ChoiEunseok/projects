@@ -6,9 +6,12 @@ import com.kh.projects.web.form.member.JoinForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.regex.Pattern;
 
 @Slf4j
 @Controller
@@ -29,10 +32,26 @@ public class MemberController {
 
   //회원가입처리
   @PostMapping("/join")
-  public String join(JoinForm joinForm) {
+  public String join(Model model, JoinForm joinForm) {
     log.info("joinForm={}", joinForm);
 
     //1)유효성 검증
+
+    String pattern =  "^.{3,10}$";
+
+    if (!Pattern.matches(pattern, joinForm.getPasswd())) {
+      model.addAttribute("joinForm", joinForm);
+      model.addAttribute("s_err_pwd", "3~10자리");
+      return "member/joinForm";
+    }
+
+    pattern =  "^.{3,10}$";
+
+    if (!Pattern.matches(pattern, joinForm.getNickname())) {
+      model.addAttribute("joinForm", joinForm);
+      model.addAttribute("s_err_nick", "3~10자리");
+      return "member/joinForm";
+    }
 
     //2)가입처리
     Member member = new Member();

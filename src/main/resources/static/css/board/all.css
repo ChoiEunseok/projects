@@ -50,3 +50,12 @@ th, td {
    justify-content:flex-end;
     margin:5px
 }
+
+.frm #pagination  {
+    display:flex;
+   justify-content:center;
+}
+
+.frm #pagination >button  {
+    margin:3px;
+}

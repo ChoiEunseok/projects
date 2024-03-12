@@ -40,7 +40,7 @@ public class CommentsSVCImpl implements CommentsSVC {
   }
 
   @Override
-  public int totalCnt() {
-    return commentsDAO.totalCnt();
+  public int totalCnt(Long boardId) {
+    return commentsDAO.totalCnt(boardId);
   }
 }

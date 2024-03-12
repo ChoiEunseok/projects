@@ -8,6 +8,7 @@
 </head>
 <body>
   <h3>로그인</h3>
+  <p th:if="${errorMessage != ''}" th:class="'err-msg on'" th:text="${errorMessage}"></p>
   <form action="" method="POST">
     <p><input type="text" name="email" placeholder="이메일"></p>
     <p><input type="password" name="passwd" placeholder="비밀번호"></p>
