@@ -57,3 +57,9 @@ update board
  --삭제
 delete from board
  where board_id = 1;
+
+ --목록(페이징)
+ select board_id, bname, title, user_content, cdate, udate
+ from board
+ order by board_id desc
+ OFFSET (:reqPage - 1) * :reqCnt ROWS FETCH first :reqCnt ROWS ONLY;

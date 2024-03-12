@@ -43,3 +43,16 @@ insert into comments(comment_id,board_id,cname,user_comment)
 commit;
 
 select * from comments;
+
+--목록(페이징)--
+SELECT b.board_id, b.title, c.comment_id, c.cname, c.user_comment, c.cdate, c.udate
+from comments c join board b on c.board_id = b.board_id
+     where b.board_id = 7
+     order by comment_id asc
+offset (:reqPage-1) * :recCnt rows fetch first :recCnt rows only;
+
+--수정
+update comments
+   set user_comment = '만나서 반갑습니다.',
+       udate = systimestamp
+ where comment_id = 1;
